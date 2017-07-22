@@ -13,4 +13,10 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
+
+/*Route::group(['middleware' => 'auth'], function() {
+    Route::resource('/cars', "Resource\\ResourceCarController");
+});*/
+
+Route::resource('/cars', "Resource\\ResourceCarController");

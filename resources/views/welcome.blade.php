@@ -5,10 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Main page</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        {{--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">--}}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
 
         <!-- Styles -->
         <style>
@@ -62,6 +65,24 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .jumbotron {
+                border-radius: 20px;
+                background-color: rgba(255,255,255,0.7);
+                padding-top: 100px;
+                padding-bottom: 100px;
+            }
+            h1 {
+                color: rgba(0, 0, 0, 0.72) !important;
+            }
+            .jumbotron .container p a.btn {
+                margin-top: 20px;
+            }
+            #promo {
+                text-align: center;
+                background: url({{ asset('img/bg.jpg') }}) no-repeat;
+                background-size: cover;
+            }
         </style>
     </head>
     <body>
@@ -77,17 +98,12 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+            <div id="promo">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h1>Best Car Hire Deals</h1>
+                        <p><a class="btn btn-success btn-md" href="{{ route('cars.index') }}" role="button">Check car list &raquo;</a></p>
+                    </div>
                 </div>
             </div>
         </div>

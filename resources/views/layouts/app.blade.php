@@ -12,20 +12,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-social.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
     <style>
         .checkbox {
             margin-left: 30px;
         }
-        #github {
-            display: inline;
-            width: 23px;
-            height: 23px;
-        }
-        .github-wrapper {
-            display: inline-block;
-        }
-        .github-text {
-            padding-top: 5px;
+        .socials {
+            padding-bottom: 15px;
         }
     </style>
 </head>

@@ -46,7 +46,7 @@
                         @endif
                     </div>
                 </div>
-                {{-- Color input --}}
+                {{-- Year input --}}
                 <div class="form-group {{ $errors->has('year') ? 'has-error' : '' }}">
                     <label for="year" class="col-md-3 control-label">Year</label>
 

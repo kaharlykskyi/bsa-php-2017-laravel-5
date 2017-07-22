@@ -12,10 +12,16 @@
             <p><span class="text-muted">Price:</span>&nbsp;{{ $car['price'] }}</p>
             <p><span class="text-muted">Year:</span>&nbsp;{{ $car['year'] }}</p>
             <p><span class="text-muted">Registration number:</span>&nbsp;{{ $car['registration_number'] }}</p>
+            <p><span class="text-muted">Mileage:</span>&nbsp;{{ $car['mileage'] }}</p>
+            <p><span class="text-muted">Owner:</span>&nbsp;{{ $owner }}</p>
         </div>
         <div class="panel-footer">
             <a href="{{ URL::route('cars.edit', $car['id']) }}" class="btn btn-warning edit-button">Edit</a>
-            <a href="{{ URL::route('cars.destroy', $car['id']) }}" class="btn btn-danger delete-button">Delete</a>
+            <form id="delete" action="{{ route('cars.destroy', $car['id']) }}" method="POST">
+                {{ csrf_field() }}
+                <input type="hidden" name="_method" value="delete">
+                <button role="button" class="btn btn-danger">Delete</button>
+            </form>
         </div>
     </div>
 @endsection

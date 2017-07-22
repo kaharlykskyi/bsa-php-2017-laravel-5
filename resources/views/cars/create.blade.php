@@ -75,7 +75,20 @@
                     </div>
                 </div>
 
-                {{-- User input --}}
+                {{-- Mileage input --}}
+                <div class="form-group {{ $errors->has('mileage') ? 'has-error' : '' }}">
+                    <label for="mileage" class="col-md-3 control-label">Mileage</label>
+
+                    <div class="col-md-6">
+                        <input id="mileage" type="text" class="form-control" name="mileage" value="{{ old('mileage') }}">
+
+                        @if ($errors->has('mileage'))
+                            <span class="help-block">{{ $errors->first('mileage') }}</span>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- User select --}}
                 <div class="form-group {{ $errors->has('user') ? 'has-danger' : '' }}">
                     <label class="col-md-3 control-label" for="user">Select car owner</label>
                     <div class="col-sm-6">

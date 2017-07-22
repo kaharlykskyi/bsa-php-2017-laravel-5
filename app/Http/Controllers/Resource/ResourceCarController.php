@@ -21,14 +21,16 @@ class ResourceCarController extends Controller
     }
 
     /**
-     * Returns a view with list of all cars.
-     *
+     * @param null $msg
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index($msg = null)
     {
         $carList = $this->carsData->findAll();
-        return view('cars/index', ['cars' => $carList->toArray()]);
+        return view('cars/index', [
+            'cars' => $carList->toArray(),
+            'message' => $msg,
+            ]);
     }
 
     /**
@@ -44,7 +46,11 @@ class ResourceCarController extends Controller
         if ($car === null) {
             abort(404);
         } else {
-            return view('cars/show', ['car' => $car->toArray()]);
+            $owner = $this->usersData->findById($car->toArray()['user_id']);
+            return view('cars/show', [
+                'car' => $car->toArray(),
+                'owner' => $owner['first_name'].' '.$owner['last_name']
+                ]);
         }
     }
 
@@ -58,13 +64,11 @@ class ResourceCarController extends Controller
      */
     public function destroy(int $id)
     {
-        if ($this->carsData->findById($id) === null) {
-            throw new ModelNotFoundException();
-            //abort(404);
-        } else {
+        try {
             $this->carsData->deleteCar($id);
-            return redirect('/cars');
         }
+        catch(ModelNotFoundException $e) {}
+        return redirect()->route('cars.index');
     }
 
     /**
@@ -99,13 +103,13 @@ class ResourceCarController extends Controller
      * Save a new car using request with validation rules
      *
      * @param CarStoreFormRules $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(CarStoreFormRules $request)
     {
         $data = new SaveCar($request);
         $this->carsData->saveCar($data);
-        return redirect('/cars');
+        return $this->index('Car successfully added!');
     }
 
     /**

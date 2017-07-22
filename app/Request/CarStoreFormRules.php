@@ -29,6 +29,7 @@ class CarStoreFormRules extends FormRequest
             'registration_number' => "required|alpha_num|size:6",
             'color' => "required|alpha",
             'price' => "required|numeric",
+            'mileage' => "required|numeric",
         ];
     }
 }

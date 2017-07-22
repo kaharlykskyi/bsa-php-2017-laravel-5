@@ -16,6 +16,17 @@
         .checkbox {
             margin-left: 30px;
         }
+        #github {
+            display: inline;
+            width: 23px;
+            height: 23px;
+        }
+        .github-wrapper {
+            display: inline-block;
+        }
+        .github-text {
+            padding-top: 5px;
+        }
     </style>
 </head>
 <body>

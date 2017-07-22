@@ -49,6 +49,26 @@
                         </div>
 
                         <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <a class="btn btn-default" href="{{ route('github.auth') }}">
+                                    <div class="github-wrapper"><img id="github" src="{{ asset('img/github.svg') }}" alt="Gitnub"></div>
+                                    <span class="github-text">
+                                        Connect via Github
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <a class="btn btn-default" href="{{ route('google.auth') }}">
+                                    <div class="github-wrapper"><img id="github" src="{{ asset('img/google.svg') }}" alt="Gitnub"></div>
+                                    <span class="github-text">
+                                        Connect via Google+
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Login

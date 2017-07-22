@@ -83,6 +83,12 @@
                 background: url({{ asset('img/bg.jpg') }}) no-repeat;
                 background-size: cover;
             }
+            .hello {
+                margin-right: 50px;
+            }
+            .hello a {
+                cursor: pointer;
+            }
         </style>
     </head>
     <body>
@@ -90,7 +96,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <span class="hello">Hello, <a href="{{ url('/home') }}">{{ Auth::user()->first_name}} {{ Auth::user()->last_name }}</a></span>
                     @else
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>

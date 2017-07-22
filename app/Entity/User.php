@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements AuthenticatableInterface
 {
-    public $timestamps = false;
+    //public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -18,6 +18,7 @@ class User extends Authenticatable implements AuthenticatableInterface
         'first_name',
         'last_name',
         'is_active',
+        'is_admin',
         'name',
         'email',
         'password'
@@ -32,6 +33,7 @@ class User extends Authenticatable implements AuthenticatableInterface
      */
     protected $casts = [
         'is_active' => 'boolean',
+        'is_admin' => 'boolean',
     ];
 
     public function cars()

@@ -77,24 +77,6 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="checkbox">
-                                <label for="is_active" class="col-md-4 control-label"></label>
-                                <div class="col-md-6">
-                                    <input id="is_active" type="checkbox" name="is_active"> Is active
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label for="is_admin" class="col-md-4 control-label"></label>
-                                <div class="col-md-6">
-                                    <input id="is_admin" type="checkbox" name="is_admin"> Is admin
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register

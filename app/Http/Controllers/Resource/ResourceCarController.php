@@ -23,7 +23,7 @@ class ResourceCarController extends Controller
     }
 
     /**
-     * @param null $msg
+     * @param $msg
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index($msg = null)

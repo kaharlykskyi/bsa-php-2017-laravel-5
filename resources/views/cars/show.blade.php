@@ -21,6 +21,7 @@
             </div>
         </nav>
     </div>
+@endsection
 @section('content')
 
     <div class="panel panel-default">
@@ -39,7 +40,7 @@
                 <form id="delete" action="{{ route('cars.destroy', $car['id']) }}" method="POST">
                     {{ csrf_field() }}
                     <input type="hidden" name="_method" value="delete">
-                    <button role="button" class="btn btn-danger">Delete</button>
+                    <button role="button" class="btn btn-danger delete-button">Delete</button>
                 </form>
             </div>
         @endcan

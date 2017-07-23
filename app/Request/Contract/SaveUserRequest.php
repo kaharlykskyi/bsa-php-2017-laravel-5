@@ -17,6 +17,21 @@ interface SaveUserRequest
     public function getLastName();
 
     /**
+     * @return string
+     */
+    public function getEmail();
+
+    /**
+     * @return bool
+     */
+    public function getIsAdmin(): bool;
+
+    /**
+     * @return string
+     */
+    public function getPassword();
+
+    /**
      * @return bool
      */
     public function getIsActive(): bool;

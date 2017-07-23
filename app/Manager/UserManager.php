@@ -52,7 +52,10 @@ class UserManager implements UserManagerContract
         $user = $request->getUser();
         $user->first_name = $request->getFirstName();
         $user->last_name = $request->getLastName();
+        $user->email = $request->getEmail();
+        $user->password = $request->getPassword();
         $user->is_active = $request->getIsActive();
+        $user->is_admin = $request->getIsAdmin();
 
         return $user->save() ? $user : null;
     }

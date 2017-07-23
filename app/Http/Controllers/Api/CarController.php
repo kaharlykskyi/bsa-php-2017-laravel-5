@@ -48,7 +48,7 @@ class CarController extends Controller
     public function getOneCar($id) : JsonResponse
     {
         $car = $this->carsData->findById($id);
-        if ($car === null) return response()->json(['error' => "car with id={$id} not found"], 404);
+        if ($car === null) return response()->json(['error' => "car with id = {$id} not found"], 404);
 
         if (isset($car->user)) {
             $userInfo = [

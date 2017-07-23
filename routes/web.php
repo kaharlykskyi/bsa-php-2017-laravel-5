@@ -29,3 +29,11 @@ Route::get('auth/github/callback', 'Auth\\Github\\LoginController@handleProvider
 Route::get('auth/google', 'Auth\\Google\\LoginController@redirectToProvider')->name('google.auth');
 Route::get('auth/google/callback', 'Auth\\Google\\LoginController@handleProviderCallback')->name('google.callback');
 
+/*Route::group(['middleware' => 'auth'], function() {
+    Route::prefix('api/cars')->group(function () {
+        Route::get('/', "Api\\CarController@getCars");
+        Route::get('{id}', "Api\\CarController@getOneCar");
+    });
+    Route::resource('api/admin/cars', "Api\\Admin\\AdminCarController", ['except' => ['create', 'edit']]);
+});*/
+

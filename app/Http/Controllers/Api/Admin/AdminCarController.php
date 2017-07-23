@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api\Admin;
 
+use App\Entity\Car;
 use App\Manager\CarManager;
 use App\Request\SaveCar;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AdminCarController
 {
@@ -24,19 +26,23 @@ class AdminCarController
      */
     public function index() : JsonResponse
     {
-        $cars = $this->carsData->findAll();
-        $allCars = [];
-        foreach ($cars as $oneCar) {
-            array_push($allCars, [
-                'id' => $oneCar->id,
-                'color' => $oneCar->color,
-                'model' => $oneCar->model,
-                'year' => $oneCar->year,
-                'price' => $oneCar->price,
-            ]);
-        }
+        if (Gate::denies('actionWithAdminApi', Car::class)) {
+            return response()->json(['error' => 'HTTP 403 Forbidden'], 403);
+        } else {
+            $cars = $this->carsData->findAll();
+            $allCars = [];
+            foreach ($cars as $oneCar) {
+                array_push($allCars, [
+                    'id' => $oneCar->id,
+                    'color' => $oneCar->color,
+                    'model' => $oneCar->model,
+                    'year' => $oneCar->year,
+                    'price' => $oneCar->price,
+                ]);
+            }
 
-        return response()->json($allCars);
+            return response()->json($allCars);
+        }
     }
 
     /**
@@ -48,32 +54,36 @@ class AdminCarController
      */
     public function show(int $id)
     {
-        $car = $this->carsData->findById($id);
-        if ($car === null) return response()->json(['error' => "car with id={$id} not found"], 404);
-
-        if (isset($car->user)) {
-            $userInfo = [
-                'id' => $car->user->id,
-                'first_name' => $car->user->first_name,
-                'last_name' => $car->user->last_name,
-                'is_active' => $car->user->is_active,
-            ];
+        if (Gate::denies('actionWithAdminApi', Car::class)) {
+            return response()->json(['error' => 'HTTP 403 Forbidden'], 403);
         } else {
-            $userInfo = [];
-        }
+            $car = $this->carsData->findById($id);
+            if ($car === null) return response()->json(['error' => "car with id={$id} not found"], 404);
 
-        return response()->json(
-            [
-                'id' => $car->id,
-                'model' => $car->model,
-                'year' => $car->year,
-                'mileage' => $car->mileage,
-                'registration_number' => $car->registration_number,
-                'color' => $car->color,
-                'price' => $car->price,
-                'user' => $userInfo,
-            ]
-        );
+            if (isset($car->user)) {
+                $userInfo = [
+                    'id' => $car->user->id,
+                    'first_name' => $car->user->first_name,
+                    'last_name' => $car->user->last_name,
+                    'is_active' => $car->user->is_active,
+                ];
+            } else {
+                $userInfo = [];
+            }
+
+            return response()->json(
+                [
+                    'id' => $car->id,
+                    'model' => $car->model,
+                    'year' => $car->year,
+                    'mileage' => $car->mileage,
+                    'registration_number' => $car->registration_number,
+                    'color' => $car->color,
+                    'price' => $car->price,
+                    'user' => $userInfo,
+                ]
+            );
+        }
     }
 
     /**
@@ -84,10 +94,14 @@ class AdminCarController
      */
     public function store(Request $request)
     {
-        $data = new SaveCar($request);
-        $car = $this->carsData->saveCar($data);
-        $id = $car->id;
-        return $this->show($id);
+        if (Gate::denies('actionWithAdminApi', Car::class)) {
+            return response()->json(['error' => 'HTTP 403 Forbidden'], 403);
+        } else {
+            $data = new SaveCar($request);
+            $car = $this->carsData->saveCar($data);
+            $id = $car->id;
+            return $this->show($id);
+        }
     }
 
     /**
@@ -98,11 +112,15 @@ class AdminCarController
      */
     public function destroy(int $id)
     {
-        try {
-            $this->carsData->deleteCar($id);
-         } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'car not found'], 404);
-         }
+        if (Gate::denies('actionWithAdminApi', Car::class)) {
+            return response()->json(['error' => 'HTTP 403 Forbidden'], 403);
+        } else {
+            try {
+                $this->carsData->deleteCar($id);
+            } catch (ModelNotFoundException $e) {
+                return response()->json(['error' => 'car not found'], 404);
+            }
+        }
     }
 
     /**
@@ -114,13 +132,17 @@ class AdminCarController
      */
     public function update(Request $request, int $id)
     {
-        $data = new SaveCar($request);
-        $car = $this->carsData->findById($id);
-        if ($car === null) {
-            return response()->json(['error' => "car with id={$id} not found"], 404);
+        if (Gate::denies('actionWithAdminApi', Car::class)) {
+            return response()->json(['error' => 'HTTP 403 Forbidden'], 403);
         } else {
-            $data->setCar($car);
-            return $this->show($this->carsData->saveCar($data)->id);
+            $data = new SaveCar($request);
+            $car = $this->carsData->findById($id);
+            if ($car === null) {
+                return response()->json(['error' => "car with id={$id} not found"], 404);
+            } else {
+                $data->setCar($car);
+                return $this->show($this->carsData->saveCar($data)->id);
+            }
         }
     }
 }

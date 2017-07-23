@@ -27,21 +27,9 @@
 </head>
 <body>
     {{-- Header --}}
-    <div class="container">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="{{ URL::route('index') }}">Car hire service</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="@yield('create-active')"><a href="{{ URL::route('cars.create') }}">Add</a></li>
-                        <li><a href="{{ URL::route('cars.index') }}">Cars list</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+    @section('header')
+
+    @show
 
     {{-- Main content --}}
     <div class="container">

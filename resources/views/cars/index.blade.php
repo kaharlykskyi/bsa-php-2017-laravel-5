@@ -2,6 +2,26 @@
 
 @section('title', 'Car list')
 
+@section('header')
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ URL::route('index') }}">Car hire service</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @can('deleteCar', App\Entity\Car::class)
+                            <li class="@yield('create-active')"><a href="{{ URL::route('cars.create') }}">Add</a></li>
+                        @endcan
+                        <li><a href="{{ URL::route('cars.index') }}">Cars list</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+@endsection
+
 @section('content')
     @if(count($cars) === 0)
         <div class="alert alert-warning" role="alert">
@@ -18,5 +38,4 @@
             @each('cars/list-item', $cars, 'car')
         </ul>
     @endif
-
 @endsection
